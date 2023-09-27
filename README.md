@@ -11,8 +11,8 @@ To install all these tools - the easiest way is to use [chocolatey](https://choc
 This piece is copied from the chocolatey documentation.
 1. Run powershell as administrator.
     * Run ```Get-ExecutionPolicy```. If it returns ```Restricted```, then run ```Set-ExecutionPolicy AllSigned``` or ```Set-ExecutionPolicy Bypass -Scope Process```.
-    * Now run the following command:
-    * ```Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))```
+    * Now run the following command: <br>
+    ```Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))```
 2. Paste the copied text into your shell and press Enter.
 3. Wait a few seconds for the command to complete.
 4. If you don't see any errors, you are ready to use Chocolatey! Type ```choco``` or ```choco -?``` to see if the commands are recognized.

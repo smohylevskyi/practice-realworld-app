@@ -3,8 +3,9 @@ This repository is intended for local practice in test automation and test case 
 
 # How to run locally
 ## Setting up reqiured tools
-To make everythin work you will need ```git```, ```npm``` and ```yarn``` installed.
-Tp install all these tools - the easiest way is to use [chocolatey](https://chocolatey.org/install)
+To make everything work you will need ```git```, ```npm``` and ```yarn``` installed.
+
+To install all these tools - the easiest way is to use [chocolatey](https://chocolatey.org/install)
 
 ### Installing chocolatey
 This piece is copied from the chocolatey documentation.

@@ -1,52 +1,78 @@
-import React, { useEffect } from "react";
-import { Switch, Route } from "react-router";
-import { connect } from "react-redux";
-import { bootstrap } from "../actions/app";
-import { IAppState } from "../reducers";
-import TransactionList from "../components/TransactionList";
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useActor, useMachine } from "@xstate/react";
+import { makeStyles } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 
-export interface OwnProps {
-  history?: object;
+import { snackbarMachine } from "../machines/snackbarMachine";
+import { notificationsMachine } from "../machines/notificationsMachine";
+import { authService } from "../machines/authMachine";
+import AlertBar from "../components/AlertBar";
+import SignInForm from "../components/SignInForm";
+import SignUpForm from "../components/SignUpForm";
+import { bankAccountsMachine } from "../machines/bankAccountsMachine";
+import PrivateRoutesContainer from "./PrivateRoutesContainer";
+
+// @ts-ignore
+if (window.Cypress) {
+  // Expose authService on window for Cypress
+  // @ts-ignore
+  window.authService = authService;
 }
 
-interface StateProps {
-  isBootstrapped: boolean;
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+}));
 
-interface DispatchProps {
-  bootstrapApp: () => void;
-}
+const App: React.FC = () => {
+  const classes = useStyles();
+  const [authState] = useActor(authService);
+  const [, , notificationsService] = useMachine(notificationsMachine);
 
-type Props = StateProps & DispatchProps & OwnProps;
+  const [, , snackbarService] = useMachine(snackbarMachine);
 
-const TransactionDetail = () => <div>Transaction Detail</div>;
+  const [, , bankAccountsService] = useMachine(bankAccountsMachine);
 
-const App: React.FC<Props> = ({ isBootstrapped, bootstrapApp }) => {
-  useEffect(() => {
-    if (!isBootstrapped) {
-      bootstrapApp();
-    }
-  });
+  const isLoggedIn =
+    authState.matches("authorized") ||
+    authState.matches("refreshing") ||
+    authState.matches("updating");
 
   return (
-    <>
-      <div>
+    <div className={classes.root}>
+      <CssBaseline />
+
+      {isLoggedIn && (
+        <PrivateRoutesContainer
+          isLoggedIn={isLoggedIn}
+          notificationsService={notificationsService}
+          authService={authService}
+          snackbarService={snackbarService}
+          bankAccountsService={bankAccountsService}
+        />
+      )}
+      {authState.matches("unauthorized") && (
         <Switch>
-          <Route exact path="/" component={TransactionList} />
-          <Route path="/t/:id" component={TransactionDetail} />
+          <Route exact path="/signup">
+            <SignUpForm authService={authService} />
+          </Route>
+          <Route exact path="/signin">
+            <SignInForm authService={authService} />
+          </Route>
+          <Route path="/*">
+            <Redirect
+              to={{
+                pathname: "/signin",
+              }}
+            />
+          </Route>
         </Switch>
-      </div>
-    </>
+      )}
+      <AlertBar snackbarService={snackbarService} />
+    </div>
   );
 };
 
-const mapStateToProps = (state: IAppState, ownProps: OwnProps) => ({
-  history: ownProps.history,
-  isBootstrapped: state.app.isBootstrapped
-});
-
-const dispatchProps = {
-  bootstrapApp: bootstrap
-};
-
-export default connect(mapStateToProps, dispatchProps)(App);
+export default App;

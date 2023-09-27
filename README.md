@@ -18,8 +18,10 @@ This piece is copied from the chocolatey documentation.
 
 ### Installing required tools
 To install all the required tools run the command line as admin and execute the following command
-```choco install git yarn nodejs```
-and follow the instructions in the command line. After the installation is finished you should restart the command line and ```npm```, ```yarn``` and ```git``` commands should be recognized.
+```choco install git yarn nodejs``` (only leave the names of tools that you do not have yet on your machine)
+and follow the instructions in the command line. 
+
+After the installation is finished you should restart the command line and ```npm```, ```yarn``` and ```git``` commands should be recognized.
 
 ## Running the app
 To run the application locally you need to run the following commands one by one. 

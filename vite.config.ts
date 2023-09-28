@@ -11,7 +11,8 @@ export default defineConfig(({ command, mode }) => {
       "process.env": env,
     },
     server: {
-      port: 3000,
+      host: true,
+      port: 3000
     },
     build: {
       outDir: "build",

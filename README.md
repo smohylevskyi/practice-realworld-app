@@ -6,8 +6,7 @@ To run the local application execute the following command on the local machine 
 ```docker run smohylevskyi/automation-practice-application:0.2```
 
 The command should download the Docker image from Dockerhub, build the app and launch it.
-Once the application is running - it will be available by the following URLs:
-[frontend](http://localhost:3000/) and [backend](http://localhost:3001/).
+Once the application is running - the terminal output will be showing you the URLs for frontend and backend.
 
 # Run without Docker 
 

@@ -1,7 +1,16 @@
 
 This repository is intended for local practice in test automation and test case writing.
 
-# How to run locally
+# Run with Docker (currently WiP, not usable)
+To run the local application execute the following command on the local machine with Docker installed.
+```docker run smohylevskyi/automation-practice-application:0.2```
+
+The command should download the Docker image from Dockerhub, build the app and launch it.
+Once the application is running - it will be available by the following URLs:
+[frontend](http://localhost:3000/) and [backend](http://localhost:3001/).
+
+# Run without Docker 
+
 ## Setting up reqiured tools
 To make everything work you will need ```git```, ```npm``` and ```yarn``` installed.
 

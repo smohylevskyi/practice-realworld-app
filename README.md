@@ -1,5 +1,7 @@
-
-This repository is intended for local practice in test automation and test case writing.
+This repository is intended for local practice in test automation and test case writing. It is a modified version of the cypress-realworld-app.
+<p align="center">
+  <img style='width: 70%' alt="Cypress Real World App" src="./public/img/rwa-readme-screenshot.png" />
+</p>
 
 # Run with Docker (currently WiP, not usable)
 To run the local application execute the following command on the local machine with Docker installed.
